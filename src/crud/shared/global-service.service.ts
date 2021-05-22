@@ -7,7 +7,8 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GlobalServiceService {
-  baseUrl: string = "http://localhost:3000";
+  // baseUrl: string = "http://localhost:3000";
+  baseUrl: string = "https://my-json-server.typicode.com/Int-coder/JSON_server";
   option = { headers: new HttpHeaders().set("Content-type", "application/json") };
   constructor(private _http: HttpClient) { }
 
