@@ -2,7 +2,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {RegName,RegContact,RegEmail,RegPassword,YOP,experience,qualification,advert} from "src/app/constants";
+import {RegName,RegContact,RegEmail,RegPassword,experience,qualification,advert} from "src/app/constants";
 import { GlobalServiceService } from 'src/crud/shared/global-service.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class EnrollmentComponent implements OnInit {
   stdform:any;
   qualification:string[]=qualification;
   specialization:boolean = true ;
-  yearOfPassing:number[]=YOP;
+ // yearOfPassing:number[]=YOP;
   stdExp:string[]=experience;
   degree:any;
   Institute:any;
@@ -22,7 +22,7 @@ export class EnrollmentComponent implements OnInit {
   Courses:any;
   courseArray:any;
   Advert:string[]=advert;
-  formControlState:boolean=false;
+  formControlState:boolean=true;
   instituteState:boolean=false;
   errorMsg: any;
   
@@ -48,6 +48,7 @@ export class EnrollmentComponent implements OnInit {
       specialization:val.stdSpecialization
     }
     this.globalSer.addData("student",stdObj).subscribe(()=>{
+      alert(stdObj.yearofPassing);
       alert("Data added successfully");
       this._router.navigate(['dashboard']);
     })
@@ -85,14 +86,14 @@ export class EnrollmentComponent implements OnInit {
   getPassingYear(option:string){
     if(option == "option1")
     {
-      this.formControlState = false;
+      this.formControlState = true;
       
 
       console.log("n",this.formControlState);
     }
     else
     {
-      this.formControlState = true;
+      this.formControlState = false;
       console.log("y",this.formControlState);
     }
   }
@@ -126,17 +127,18 @@ export class EnrollmentComponent implements OnInit {
     .subscribe((res)=>{this.courseArray=res; console.log("hi response course",res)},
     (error)=>{this.errorMsg=error});
   }  
+
   form(){
   this.stdform = this._FormBuilder.group({
     stdFullName:['',[Validators.required,Validators.pattern(RegName)]],
     stdMobile:['',[Validators.required,Validators.pattern(RegContact)]],
     stdEmail:['',[Validators.required,Validators.pattern(RegEmail)]],
+    //name: [{value: '', disabled: this.isDisabled}, Validators.required]
 
     stdQualification:['',[Validators.required]],
     stdSpecialization:['',[Validators.required]],
-    appearing:['',[Validators.required]],
-    stdPassingYear:['',[Validators.required]],
-
+     appearing:['',[Validators.required]],
+    stdPassingYear:[{value:''},[Validators.required]],
     stdCollegeName:['',[Validators.required]],
 
     stdCity:['',[Validators.required,Validators.pattern(RegName)]],

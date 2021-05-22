@@ -73,11 +73,15 @@
                             <!-------YOP-------->
     <div class="form-group">
         <label>Year of Passing</label><br>
-        
-        <select class="form-control" formControlName="stdPassingYear" *ngIf="formControlState">
+        <fieldset [disabled]="formControlState">
+            <!-- another method by using [readonly]="condition"
+                <input type="month" formControlName="stdPassingYear" [readonly]="FormControlState" class="form-control"> -->
+            <input type="month" formControlName="stdPassingYear" class="form-control"><br>
+        </fieldset>
+        <!-- <select class="form-control" formControlName="stdPassingYear" *ngIf="formControlState">
             <option value="">Select </option>
             <option [value]="year" *ngFor="let year of yearOfPassing">{{year}} </option> 
-        </select>
+        </select> -->
 
         <div class="alert alert-danger"
             *ngIf="stdform.get('stdPassingYear').invalid && stdform.get('stdPassingYear').touched">
