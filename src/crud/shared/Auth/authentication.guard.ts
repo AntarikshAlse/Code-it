@@ -12,7 +12,7 @@ export class AuthenticationGuard implements CanActivate {
       if(!!sessionStorage.getItem('user')){
          return true;
       }else{
-        alert('you are not authorize persion');
+        alert('you are not authorize person');
         return false;
       }
     }
